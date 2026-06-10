@@ -1,0 +1,76 @@
+{
+  "manifest_version": 3,
+  "name": "Prize Sniper [ADMIN]",
+  "version": "7.4.0",
+  "description": "Prize Sniper Bot — Admin (standalone, sem licença)",
+  "permissions": [
+    "storage",
+    "scripting",
+    "tabs",
+    "webNavigation",
+    "downloads",
+    "offscreen",
+    "debugger"
+  ],
+  "host_permissions": [
+    "*://*.pokgaming.com/*",
+    "*://*.pokgaming80.com/*",
+    "*://*.7games.bet.br/*",
+    "*://*.betao.bet.br/*",
+    "*://*.r7.bet.br/*",
+    "https://2captcha.com/*",
+    "https://api.2captcha.com/*",
+    "https://api.capsolver.com/*",
+    "https://gcaptcha4.geetest.com/*"
+  ],
+  
+  "background": {
+    "service_worker": "sw.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+  "*://*.pokgaming.com/*",
+  "*://*.pokgaming80.com/*",
+  "*://*.betao.bet.br/*",
+  "*://games.betao.bet.br/*",
+  "*://games.7games.bet.br/*"
+],
+      "js": ["ws-hook.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "*://*.7games.bet.br/*",
+        "*://*.betao.bet.br/*",
+        "*://*.r7.bet.br/*"
+      ],
+      "js": ["content_platform.js"],
+      "run_at": "document_start",
+      "all_frames": false,
+      "world": "ISOLATED"
+    }
+  ],
+ "web_accessible_resources": [
+    {
+      "resources": ["botcode.js"],
+      "matches": [
+        "*://*.pokgaming.com/*",
+        "*://*.pokgaming80.com/*",
+        "*://*.betao.bet.br/*",
+        "*://games.betao.bet.br/*",
+        "*://games.7games.bet.br/*",
+        "*://*.7games.bet.br/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": { "16": "icon.png", "48": "icon.png", "128": "icon.png" }
+}
